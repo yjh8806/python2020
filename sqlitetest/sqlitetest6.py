@@ -7,7 +7,8 @@ while True:
     3. DATA 수정
     4. DATA 삭제
     5. DATA 목록
-    6. 프로그램 종료
+    6. DATA 전체 목록
+    7. 프로그램 종료
     ''')
     print("메뉴 선택 >>> ",end='')
 
@@ -24,6 +25,8 @@ while True:
     elif menu == '5':
         sqliteDB.select_data()
     elif menu == '6':
+        sqliteDB.select_alldata()
+    elif menu == '7':
         print("프로그램을 종료합니다")
         break
     else:

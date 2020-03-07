@@ -53,6 +53,18 @@ def select_data():
     conn.close()
     # 전체 목록을 출력하려면 title 변수 작업 필요 X
 
+def select_alldata():
+    conn = db_conn()
+    cur = conn.cursor()
+    cur.execute('select * from books')
+
+    print("현재 DATA 목록")
+    print(">>> ",end='')
+    print(cur.fetchall())
+    conn.close()
+    # 전체 목록을 출력하려면 title 변수 작업 필요 X
+
+
 def update_date():
     pass
 
