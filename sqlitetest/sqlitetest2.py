@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('python2020/sqlitetest/example.db')
+conn = sqlite3.connect('sqlitetest/example.db')
 c = conn.cursor()
 c.execute('''
 insert into stocks
