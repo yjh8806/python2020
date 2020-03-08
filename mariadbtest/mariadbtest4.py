@@ -21,6 +21,6 @@ c.executemany(sql, data)
 conn.commit()   # insert문은 변화 有! commit 필수
 
 sql = 'select * from stocks order by price desc' # order by ~~: ~~순으로 정렬
-c.excute(sql)
+c.execute(sql)
 print(c.fetchall())
 conn.close()
