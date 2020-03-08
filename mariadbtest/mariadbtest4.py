@@ -15,7 +15,7 @@ data = [
     ('2020-06-08', 'buy', 'com', 42, 17.67)
     ]
 
-sql = ('insert into stocks values(%s,%s,%s,%s,%s)')
+sql = 'insert into stocks values(%s,%s,%s,%s,%s)'
 
 c.executemany(sql, data)
 conn.commit()   # insert문은 변화 有! commit 필수
