@@ -19,7 +19,7 @@ while True:
     elif menu == '2':
         sqliteDB.insert_data()
     elif menu == '3':
-        sqliteDB.update_data()
+        pass
     elif menu == '4':
         sqliteDB.delete_data()
     elif menu == '5':
