@@ -7,7 +7,7 @@ while True:
     2. 상품 입력
     3. 상품 수정
     4. 상품 삭제
-    5. 상품 목록
+    5. 상품 정보
     6. 상품 전체 목록
     7. 프로그램 종료
     ''')
@@ -18,15 +18,15 @@ while True:
     if menu == '1':
         productDB.create_table()
     elif menu == '2':
-        pass
+        productDB.insert_data()
     elif menu == '3':
-        pass
+        productDB.update_stocks()
     elif menu == '4':
-        pass
+        productDB.delete_stocks()
     elif menu == '5':
-        pass
+        productDB.select_data()
     elif menu == '6':
-        pass
+        productDB.select_alldata()
     elif menu == '7':
         print("프로그램을 종료합니다")
         break
