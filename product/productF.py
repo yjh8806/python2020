@@ -1,12 +1,11 @@
 import pymysql
 
 def conn_db():
-    conn = pymysql.connect(host = 'maria',
-                           user = 'root',
-                           password = 'qwer1234',
-                           db = 'test',
-                           charset = 'utf8',
-                           cursorclass = pymysql.cursors.DictCursor)
+    conn = pymysql.connect(host='maria',
+                        user='root',
+                        password='qwer1234',
+                        db='test',
+                        cursorclass=pymysql.cursors.DictCursor)
     return conn
 
 def create_table():
