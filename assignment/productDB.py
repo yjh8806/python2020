@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pymysql
 
 def conn_db():
@@ -15,11 +14,11 @@ def create_table():
     c = conn.cursor()
 
     sql = '''
-    create table if not exists stocks
-    p_name text,
-    p_qty real,
-    p_price real,
-    recommend text
+    create table if not exists stocks(
+    name text,
+    qty real,
+    price real,
+    recommend text)
     '''
     
     c.execute(sql)
@@ -31,12 +30,12 @@ def insert_data():
     conn = conn_db()
     c = conn.cursor()
 
-    name = input("상품의 이름 : ")
-    qty = int(input("상품의 수량 : "))
-    price = int(input("상품의 가격 : "))
+    p_name = input("상품의 이름 : ")
+    p_qty = int(input("상품의 수량 : "))
+    p_price = int(input("상품의 가격 : "))
     
     sql = 'insert into stocks value(%s,%s,%s)'
-    c.execute(sql,[name, qty, price])
+    c.execute(sql,[p_name, p_qty, p_price])
     conn.commit()
     conn.close()
     print("상품 추가 완료")
