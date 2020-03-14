@@ -10,9 +10,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap');
     </style>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script|Sunflower:300&display=swap');
-    </style>
     <title>Hello, world!</title>
   </head>
   <body>
@@ -46,26 +43,23 @@
     </div>
     <br>
     <div class="container"> <!-- container와 container-fluid 차이 알아두기 -->
-        <h1 style="color: black; font-family: 'Nanum Pen Script', cursive;
-        font-family: 'Sunflower', sans-serif; text-align: center; background-color: lemonchiffon;">고객 정보 리스트</h1>
-        <table class="table table-hover">
-            <thead>
-              <tr> <!-- <tr> : 하나의 행 -->
-                <th scope="col"></th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-            </tbody>
-        </table>
+        <form action="/login" method="post">
+            <div class="form-group">
+              <label for="Name">Name</label> 
+              <input type="text" class="form-control" id="Name" name="Name">
+             
+            </div>
+            <div class="form-group">
+                <label for="Email">Email address</label> <!-- email address를 눌러도 입력창에 커서를 표시하게 해줌 -->
+                <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="Password">Password</label>
+              <input type="password" class="form-control" id="Password" name="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
     </div>
     <br>
     <div class="container-fluid">

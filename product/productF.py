@@ -31,12 +31,12 @@ def insert_data():
     c = conn.cursor()
 
     p_name = input("상품의 이름 : ")
-    p_qty = input("상품의 수량 : ")
-    p_price = input("상품의 가격 : ")
+    p_qty = int(input("상품의 수량 : "))
+    p_price = int(input("상품의 가격 : "))
     p_recommend = input("비고 : ")
     
-    sql = 'insert into stocks value(%s,%s,%s)'
-    c.execute(sql,[p_name, p_qty, p_price, p_recommend])
+    sql = 'insert into stocks value(%s,%s,%s,%s)'
+    c.execute(sql,(p_name, p_qty, p_price, p_recommend))
     conn.commit()
     conn.close()
     print("상품 추가 완료")
@@ -46,8 +46,8 @@ def select_data():
     c = conn.cursor()
 
     src_name = input("찾고자 하는 상품의 이름 : ")
-    t = (src_name)
-    sql = 'select * from stocks where p_name=%s'
+    t = src_name
+    sql = 'select * from stocks where src_name=%s'
     c.execute(sql, t)
 
     print(src_name,"의 정보 : ",end='')
