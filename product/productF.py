@@ -14,10 +14,11 @@ def create_table():
 
     sql = '''
     create table if not exists stocks(
-    name text,
-    qty real,
-    price real,
-    recommend text)
+    name varchar(50),
+    qty int default 0,
+    price int default 0,
+    recommend varchar(500)
+    )
     '''
     
     c.execute(sql)
@@ -30,11 +31,12 @@ def insert_data():
     c = conn.cursor()
 
     p_name = input("상품의 이름 : ")
-    p_qty = int(input("상품의 수량 : "))
-    p_price = int(input("상품의 가격 : "))
+    p_qty = input("상품의 수량 : ")
+    p_price = input("상품의 가격 : ")
+    p_recommend = input("비고 : ")
     
     sql = 'insert into stocks value(%s,%s,%s)'
-    c.execute(sql,[p_name, p_qty, p_price])
+    c.execute(sql,[p_name, p_qty, p_price, p_recommend])
     conn.commit()
     conn.close()
     print("상품 추가 완료")

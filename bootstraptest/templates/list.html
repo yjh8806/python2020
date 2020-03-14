@@ -10,6 +10,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap');
     </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script|Sunflower:300&display=swap');
+    </style>
     <title>Hello, world!</title>
   </head>
   <body>
@@ -25,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/form">입력 폼</a>
@@ -42,43 +45,31 @@
           </nav>
     </div>
     <br>
-    <div class="container-fluid">
-        <div class="jumbotron" style="background-image: url('/static/img1.jpeg'); background-repeat: no-repeat; background-size: cover;">
-            <h1 class="display-4" style="color: white; font-family: 'Nanum Pen Script', cursive;">Python 데이터 분석</h1>
-            <p class="lead" style="color: white; font-family: 'Nanum Pen Script', cursive; font-size: 30px;">간단한 히어로 유닛, 그리고 간단한 점보트론 스타일 컴포넌트</p>
-            <hr class="my-4">
-            <p style="color: white;">It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </div>
+    <div class="container"> <!-- container와 container-fluid 차이 알아두기 -->
+        <h1 style="color: black; font-family: 'Nanum Pen Script', cursive;
+        font-family: 'Sunflower', sans-serif; text-align: center; background-color:lemonchiffon;">고객 정보 리스트</h1>
+        <table class="table table-hover">
+            <thead>
+              <tr> <!-- <tr> : 하나의 행 -->
+                <th scope="col"></th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+            </tbody>
+        </table>
     </div>
     <br>
     <div class="container-fluid">
-        <div class="card-group">
-            <div class="card">
-              <img src="/static/img1.jpeg" class="card-img-top" alt="..." height="140px">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="/static/img2.jpeg" class="card-img-top" alt="..." height="140px">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="/static/img3.jpeg" class="card-img-top" alt="..." height="140px">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
+        
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
