@@ -1,2 +1,14 @@
+/* 공통 선택자(Universal Selector) 문장 순서에 따라 우선순위 정해지므로 순서에 주의!! */
+*{color: gold;}
+
 /* 선택자(selector){ 속성(property):속성값(value); --> ;은 구분자 */
-p{color: salmon } /* 16진수(#000000)로도 표현가능 --> 16진수 rgb값*/
+p{color: salmon; background-color: bisque;} /* 16진수(#000000)로도 표현가능 --> 16진수 rgb값*/
+
+body{background-color: coral;}
+
+h1 {color: white;
+    text-align: center;}
+
+p span{color:blue;} /*p태그 안에 있는 span을 의미*/
+
+/* 우선순위(10진수 환산값에 의한) --> inline style(style) > id(#) > class(.) > element(태그에 바로) */

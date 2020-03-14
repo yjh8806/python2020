@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>css 연습</title>
+        <link rel="stylesheet" type="text/css" href="/static/mystyle.css"> <!-- link(외부에서 가져오기)는 보통 head 안에!!-->
+        <style type="text/css">
+            p{color: cadetblue;}
+            span{color: chartreuse;}
+        </style>
+
+    </head>
+    <body>
+        <h1>css 연습</h1>
+        <span>div 영역</span> <!--공통 선택자 있을 때 속성 지정안하면 공통 선택자 영향받음!! -->
+        <p style="color: crimson;">
+            css 연습입니다<br>
+            <h1>
+            <span>단락안에 있는 div 영역</span>
+            </h1>
+        </p>
+    </body>
+</html>
