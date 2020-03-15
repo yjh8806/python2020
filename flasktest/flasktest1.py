@@ -10,7 +10,7 @@ def hello(name = None):
     else:
         return 'A horse me named %s'%name
 
-@app.route('/login' , methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method =='POST':
         return render_template('list.html', data=request.form) # return request.form['Name']

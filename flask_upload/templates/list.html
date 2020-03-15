@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<title>Python Flask File Download Example</title>
+<h2>Download a file</h2>
+
+<p>
+    {% for file in files %}
+    <a href="/files/{{file}}">{{file}}</a> <br>
+    {% endfor %}
+</p>
