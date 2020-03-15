@@ -38,7 +38,7 @@ def usersform():
         userpw = request.form.get('userpw')
         username = request.form.get('username')
         userage = request.form.get('userage')
-        usermail = request.form.get('usermail')
+        useremail = request.form.get('useremail')
         useradd = request.form.get('useradd')
         usergender = request.form.get('usergender')
         usertel = request.form.get('usertel')
@@ -55,7 +55,7 @@ def usersform():
                 sql='''
                     insert into users values(%s,%s,%s,%s,%s,%s,%s,%s);
                     '''
-                cursor.execute(sql,(userid,userpw,username,userage,usermail,useradd,usergender,usertel))
+                cursor.execute(sql,(userid,userpw,username,userage,useremail,useradd,usergender,usertel))
                 connection.commit()
                      
         finally:
@@ -95,7 +95,7 @@ def updateformpost():
     userpw = request.form.get('userpw')
     username = request.form.get('username')
     userage = request.form.get('userage')
-    usermail = request.form.get('usermail')
+    useremail = request.form.get('useremail')
     useradd = request.form.get('useradd')
     usergender = request.form.get('usergender')
     usertel = request.form.get('usertel')
@@ -114,7 +114,7 @@ def updateformpost():
                 usertel=%s
                 where userid=%s;
                 '''
-            cursor.execute(sql,(userpw,username,userage,usermail,useradd,usergender,usertel,userid))
+            cursor.execute(sql,(userpw,username,userage,useremail,useradd,usergender,usertel,userid))
             connection.commit()
     finally:
         connection.close()                            
@@ -168,7 +168,7 @@ def list():
                             cursorclass=pymysql.cursors.DictCursor)
     try:
         with connection.cursor() as cursor:
-                sql="select  * from users;"
+                sql="select * from users;"
                 cursor.execute(sql)
                 result=cursor.fetchall()
                 print(result)

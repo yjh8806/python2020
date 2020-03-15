@@ -24,7 +24,7 @@
             
             <tbody>
               {% for item in list: %}
-              <tr>
+              <tr>  <!-- item.userid 가능 !! -->
                 <td><a href="/content/{{item['userid']}}">{{item['userid']}}</a></td>
                 <td>{{item['userpw']}}</td>
                 <td>{{item['username']}}</td>
