@@ -4,7 +4,7 @@ connection = pymysql.connect(host='maria',
                              user = 'root',
                              password = 'qwer1234',
                              db = 'test',
-                             charset = 'usf8mb4',
+                             charset = 'utf8mb4',
                              cursorclass = pymysql.cursors.DictCursor)
 
 try:

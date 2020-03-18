@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "import.html" %}
+    <title>{{list['platename']}} 메뉴 수정</title>
+  </head>
+  <body>
+    {% include "menu.html" %}     
+    <h1 align="center">[{{list['platename']}}] 메뉴 수정</h1>
+    <div class="container-fluid">
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">메뉴</th>
+                <th scope="col">가격</th>
+                <th scope="col">레시피 (비고)</th>
+                <th scope="col">구입처 (발주)</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+ 
+              <tr>
+                <td>{{list['platename']}}</td>
+                <td>{{list['plateprice']}}</td>
+                <td>{{list['recipe']}}</td>
+                <td>{{list['market']}}</td>
+              </tr>
+
+              </tbody>
+          </table>
+          <script type="text/javascript"> 
+            function goUpdate() { 
+                dir="/updateform/{{list['platename']}}"
+                location.replace(dir); 
+            } 
+            function goDelete() { 
+              dir="/deleteform/{{list['platename']}}"
+              location.replace(dir); 
+            }
+            
+          </script>
+          <button type="button" class="btn btn-success" onclick="goUpdate()">수정</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">삭제</button>
+          <button type="button" class="btn btn-info" onclick="location.replace('/list'); ">목록으로</button>
+
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">삭제 확인</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  삭제하시겠습니까?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                  <button type="button" class="btn btn-primary" onclick="goDelete()">삭제</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+   </body>
+</html>

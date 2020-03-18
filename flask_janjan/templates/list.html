@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "import.html" %}
+    <title>메뉴 목록</title>
+  </head>
+  <body>
+    {% include "menu.html" %}     
+    <h1 align="center">메뉴 목록</h1>
+    <div class="container-fluid">
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">메뉴</th>
+                <th scope="col">가격</th>
+                <th scope="col">레시피 (비고)</th>
+                <th scope="col">구입처 (발주)</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              {% for item in list: %}
+              <tr>  <!-- item.userid 가능 !! -->
+                <td><a href="/content/{{item['platename']}}">{{item['platename']}}</a></td>
+                <td>{{item['plateprice']}}</td>
+                <td>{{item['recipe']}}</td>
+                <td>{{item['market']}}</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+    </div>
+   </body>
+</html>
