@@ -44,7 +44,7 @@ def menuform():
                 (%s,%s,%s,%s);
                 '''
                 cursor.execute(sql,(platename,plateprice,recipe,market))
-                connection.coomit()
+                connection.commit()
 
         finally:
                 connection.close()
@@ -52,9 +52,24 @@ def menuform():
     return redirect('/list')
 
 @app.route('/updateform/<platename>', methods=['GET'])
-def updateformget():
-    connection = pymysql.connect(host)
+def updateformget(platename):
+    connection = pymysql.connect(host='maria',
+                                 user='root',
+                                 password='qwer1234',
+                                 db='test',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
 
+    try:
+        with connection.cursor() as cursor:
+            sql = "select * from janjan where platename = %s;"
+            cursor.execute(sql, platename)
+            result = cursor.fetchone()
+            print(result)
+    finally:
+        connection.close()
+    return render_template('updateform.html', list = result)
+    
 
 
 if __name__ == '__main__':
