@@ -16,10 +16,6 @@ app = Flask(__name__)
 def index():
     return render_template('bootstraptest.html')
 
-@app.route('/form')
-def formTest():
-    return render_template('form.html')
-
 @app.route('/menuform', methods=['POST', 'GET'])
 def menuform():
     if request.method == 'GET':
@@ -69,7 +65,7 @@ def updateformget(platename):
     finally:
         connection.close()
     return render_template('updateform.html', list = result)
-    
+
 
 
 if __name__ == '__main__':
