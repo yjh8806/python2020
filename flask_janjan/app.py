@@ -16,6 +16,10 @@ app = Flask(__name__)
 def index():
     return render_template('bootstraptest.html')
 
+@app.route('bootstrap')
+def bootstraptest():
+    return render_template('bootstraptest.html')
+
 @app.route('/menuform', methods=['POST', 'GET'])
 def menuform():
     if request.method == 'GET':
@@ -85,13 +89,12 @@ def updateformpost():
             sql='''
             update janjan
             set
-            platename=%s,
             plateprice=%s,
             recipe=%s,
             market=%s
             where platename=%s;
             '''
-            cursor.execute(sql,(platename,plateprice,recipe,market))
+            cursor.execute(sql,(plateprice,recipe,market,platename))
             connection.commit()
     finally:
         connection.close()
@@ -114,7 +117,11 @@ def content(platename):
     finally:
         connection.close()
     return render_template('content.html', list=result)
-    
+
+
+
+
+
 @app.route('/list')
 def list():
     connection = pymysql.connect(host='maria',
@@ -151,7 +158,33 @@ def ajaxlistget():
         connection.close()
     return render_template('ajaxlist.html', list=result)
 
+@app.route('/ajaxlist', methods=['POST'])
+def ajaxlistpost():
+    platename = request.form.get('platename')
+    connection = pymysql.connect(host='maria',
+                                 user='root',
+                                 password='qwer1234',
+                                 db='test',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            sql="select * from janjan where platename like %s"
+            platename=platename+'%s'
+            cursor.execute(sql, platename+'%s')
+            result=cursor.fetchall()
+            print(result)
+    finally:
+        connection.close()
+    return jsonify(result)
 
+@app.route('/imglist')
+def imglist():
+    print(os.path.dirname(__file__))
+    dirname = os.path.dirname(__file__) + '/static/img'
+    filenames = os.listdir(dirname)
+    print(filenames)
+    return render_template('imglist.html', filenames=filenames)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8890)
