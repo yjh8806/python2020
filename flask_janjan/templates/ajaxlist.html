@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "import.html" %}
+    <title>메뉴 수</title>
+    <script src="http://code.jquery.com/jquery-latest.js" ></script>
+    <script>
+     function cmdajax(){
+      $.ajax({	type : "POST",
+					data : {	"platename" : $("#platename").val()	},
+					url : "/ajaxlist",
+					dataType : "json",
+					success : function(result) {
+						console.log(result);
+            $("#ajaxlist").html("");
+						$("#ajaxlist").append(
+             ' <table class="table table-hover table-dark">'+
+           ' <thead>'+
+             ' <tr>'+
+                '<th scope="col">메뉴 이름</th>'+
+                '<th scope="col">메뉴 가격</th>'+
+                '<th scope="col">레시피 (비고)</th>'+
+                '<th scope="col">구입처 (발주)</th>'+
+              '</tr>'+
+            '</thead>'
+            ); 
+
+            $(result).each(function(index, item) {
+            $("table").append(
+              "<tr>"
+              + "<td><a href='/content/"+ item.platename +"'>"
+              + item.platename 
+              + "</a></td>"
+              + "<td>"
+							+ item.plateprice
+							+ "</td>"
+							+ "<td>"
+							+ item.recipe
+							+ "</td>"
+							+ "<td>"
+							+ item.market
+							+ "</td>"
+              + "<tr>"
+              
+            );
+
+          
+          });
+			}
+	});
+}
+
+    </script>
+  </head>
+  <body>
+    {% include "menu.html" %}     
+    <h1 align="center">회원목록 리스트</h1>
+    <div class="container-fluid">
+      <form method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" onkeyup="cmdajax();"  placeholder="platename" id="platename" name="platename" aria-label="userid" aria-describedby="button-addon2">
+        </div>
+      </form>
+    </div>
+    
+    <div class="container-fluid">
+      <div id='ajaxlist'>
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">메뉴 이름</th>
+                <th scope="col">메뉴 가격</th>
+                <th scope="col">레시피 (비고)</th>
+                <th scope="col">구입처 (발주)</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              {% for item in list: %}
+              <tr>
+                <td><a href="/content/{{item['userid']}}">{{item['userid']}}</a></td>
+                <td>{{item['platename']}}</td>
+                <td>{{item['plateprice']}}</td>
+                <td>{{item['recipe]}}</td>
+                <td>{{item['market]}}</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+        </div>
+    </div>
+   </body>
+</html>

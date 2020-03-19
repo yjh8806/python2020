@@ -68,7 +68,34 @@ def updateformget(platename):
 
 @app.route('/updateform', methods=['POST'])
 def updateformpost():
-    pass
+    connection=pymysql.connect(host='maria',
+                               user='root',
+                               password='qwer1234',
+                               db='test',
+                               charset='utf8mb4',
+                               cursorclass=pymysql.cursors.DictCursor)
+
+    platename = request.form.get('platename')
+    plateprice = request.form.get('plateprice')
+    recipe = request.form.get('recipe')
+    market = request.form.get('market')
+
+    try:
+        with connection.cursor() as cursor:
+            sql='''
+            update janjan
+            set
+            platename=%s,
+            plateprice=%s,
+            recipe=%s,
+            market=%s
+            where platename=%s;
+            '''
+            cursor.execute(sql,(platename,plateprice,recipe,market))
+            connection.commit()
+    finally:
+        connection.close()
+    return redirect('/list')
 
 @app.route('/content/<platename>')
 def content(platename):
@@ -105,6 +132,25 @@ def list():
     finally:
         connection.close()
     return render_template('list.html', list = result)
+
+@app.route('/ajaxlist', methods=['GET'])
+def ajaxlistget():
+    connection=pymysql.connect(host='maria',
+                               user='root',
+                               password='qwer1234',
+                               db='test',
+                               charset='utf8mb4',
+                               cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            sql="select * from janjan;"
+            cursor.execute(sql)
+            result=cursor.fetchall()
+            print(result)
+    finally:
+        connection.close()
+    return render_template('ajaxlist.html', list=result)
+
 
 
 if __name__ == '__main__':
