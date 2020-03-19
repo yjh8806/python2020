@@ -6,14 +6,15 @@
   </head>
   <body>
     {% include "menu.html" %}     
-    <h1 align="center">메뉴 목록</h1>
+    <h1 align="center">메뉴 목록</h1><br>
     <div class="container-fluid">
-        <table class="table table-hover table-dark">
+        <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col" width="140px" align="center">메뉴</th>
-                <th scope="col" align="center">가격</th>
-                <th scope="col" align="center">레시피 (비고)</th>
+                <th scope="col" width="30" align="center"></th>
+                <th scope="col" width="140px" style="text-align: center;">메뉴</th>
+                <th scope="col" width="140" style="text-align: center;">가격</th>
+                <th scope="col" style="text-align: center;">레시피 (비고)</th>
                 <th scope="col">구입처 (발주)</th>
               </tr>
             </thead>
@@ -21,10 +22,11 @@
             <tbody>
               {% for item in list: %}
               <tr>  <!-- item.userid 가능 !! -->
-                <td><a href="/content/{{item['platename']}}">{{item['platename']}}</a></td>
-                <td>{{item['plateprice']}}</td>
-                <td>{{item['recipe']}}</td>
-                <td>{{item['market']}}</td>
+                <th scope="row" style="text-indent: 10pt;" align="center">{{loop.index}}</th>
+                <td style="text-align: center;"><a href="/content/{{item['platename']}}">{{item['platename']}}</a></td>
+                <td style="text-align: center;">{{item['plateprice']}}</td>
+                <td style="text-align: center;">{{item['recipe']}}</td>
+                <td style="text-align: center;">{{item['market']}}</td>
               </tr>
               {% endfor %}
               </tbody>

@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     return render_template('bootstraptest.html')
 
-@app.route('bootstrap')
+@app.route('/bootstrap')
 def bootstraptest():
     return render_template('bootstraptest.html')
 
@@ -50,6 +50,11 @@ def menuform():
                 connection.close()
 
     return redirect('/list')
+
+@app.route('/memberform', methods=['POST', 'GET'])
+def memberform():
+    pass
+
 
 @app.route('/updateform/<platename>', methods=['GET'])
 def updateformget(platename):
@@ -118,9 +123,22 @@ def content(platename):
         connection.close()
     return render_template('content.html', list=result)
 
-
-
-
+@app.route('/deleteform/<platename>')
+def deleteformget(platename):
+    connection=pymysql.connect(host='maria',
+                               user='root',
+                               password='qwer1234',
+                               db='test',
+                               charset='utf8',
+                               cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            sql="delete from janjan where platename=%s;"
+            cursor.execute(sql,platename)
+            connection.commit()
+    finally:
+        connection.close()
+    return redirect('/list')
 
 @app.route('/list')
 def list():
@@ -170,8 +188,8 @@ def ajaxlistpost():
     try:
         with connection.cursor() as cursor:
             sql="select * from janjan where platename like %s"
-            platename=platename+'%s'
-            cursor.execute(sql, platename+'%s')
+            platename=platename+'%'
+            cursor.execute(sql, platename+'%')
             result=cursor.fetchall()
             print(result)
     finally:
