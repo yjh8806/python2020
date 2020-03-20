@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "import.html" %}
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    {% include "menu.html" %}
+    <br>  
+    <h1 align="center">회원가입</h1>
+        <div class="container">
+                <form action="/userform" method="POST">
+                        <div class="form-group">
+                          <label for="usernum">식별 번호</label>
+                          <input type="text" class="form-control" id="usernum" name="usernum" aria-describedby="usernumHelp" placeholder="입사년도와 고유번호는 '-'로 구분">
+                          <small id="usernumHelp" class="form-text text-muted">부여받은 식별 번호 그대로 입력하세요.</small>
+                        </div>
+                        <div class="form-group">
+                                <label for="username">이름</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="성명 입력란">
+                        </div>
+                        <div class="form-group">
+                                <label for="userage">나이</label>
+                                <input type="text" class="form-control" id="userage" name="userage"  placeholder="나이 입력란">
+                        </div>
+                        <div class="form-group">
+                                <label for="usertel">연락처</label>
+                                <input type="text" class="form-control" id="usertel" name="usertel" placeholder="예시) 010-1234-5678">
+                        </div>
+                        <button type="submit" class="btn btn-primary">제출</button>
+                </form>
+        </div>
+
+      </body>
+</html>

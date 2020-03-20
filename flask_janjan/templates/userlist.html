@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "import.html" %}
+    <title>직원 목록</title>
+  </head>
+  <body>
+    {% include "menu.html" %}     
+    <h1 align="center">직원 목록</h1><br>
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" width="70" style="text-align: center;" align="center">번호</th>
+                <th scope="col" width="170" style="text-align: center;">식별 번호</th>
+                <th scope="col" width="170" style="text-align: center;">이름</th>
+                <th scope="col" width="170" style="text-align: center;">나이</th>
+                <th scope="col" width="170" style="text-align: center;">연락처</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              {% for item in list: %}
+              <tr>  <!-- item.userid 가능 !! -->
+                <th scope="col" style="text-align: center; " align="center">{{loop.index}}</th>
+                <td style="text-align: center;"><a href="/usercontent/{{item['usernum']}}">{{item['usernum']}}</a></td>
+                <td style="text-align: center;">{{item['username']}}</td>
+                <td style="text-align: center;">{{item['userage']}}</td>
+                <td style="text-align: center;">{{item['usertel']}}</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+    </div>
+   </body>
+</html>

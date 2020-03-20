@@ -51,10 +51,36 @@ def menuform():
 
     return redirect('/list')
 
-@app.route('/memberform', methods=['POST', 'GET'])
-def memberform():
-    pass
+@app.route('/userform', methods=['POST', 'GET'])
+def userform():
+    if request.method == 'GET':
+        return render_template('userform.html')
+    else:
+        usernum = request.form.get('usernum')
+        username = request.form.get('username')
+        userage = request.form.get('userage')
+        usertel = request.form.get('usertel')
 
+        try:
+            connection = pymysql.connect(host='maria',
+                                         user='root',
+                                         password='qwer1234',
+                                         db='test',
+                                         charset='utf8mb4',
+                                         cursorclass=pymysql.cursors.DictCursor)
+            
+            with connection.cursor() as cursor:
+                sql = '''
+                insert into employee values
+                (%s,%s,%s,%s);
+                '''
+                cursor.execute(sql, (usernum, username, userage, usertel))
+                connection.commit()
+
+        finally:
+                connection.close()
+
+    return redirect('/userlist')
 
 @app.route('/updateform/<platename>', methods=['GET'])
 def updateformget(platename):
@@ -140,6 +166,90 @@ def deleteformget(platename):
         connection.close()
     return redirect('/list')
 
+@app.route('/userupdate/<usernum>', methods=['GET'])
+def user_updateformget(usernum):
+    connection = pymysql.connect(host='maria',
+                                 user='root',
+                                 password='qwer1234',
+                                 db='test',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
+
+    try:
+        with connection.cursor() as cursor:
+            sql = "select * from employee where usernum = %s;"
+            cursor.execute(sql, usernum)
+            result = cursor.fetchone()
+            print(result)
+    finally:
+        connection.close()
+    return render_template('user_updateform.html', list = result)
+
+@app.route('/userupdate', methods=['POST'])
+def user_updateformpost():
+    connection=pymysql.connect(host='maria',
+                               user='root',
+                               password='qwer1234',
+                               db='test',
+                               charset='utf8mb4',
+                               cursorclass=pymysql.cursors.DictCursor)
+
+    usernum = request.form.get('usernum')
+    username = request.form.get('username')
+    userage = request.form.get('userage')
+    usertel = request.form.get('usertel')
+
+    try:
+        with connection.cursor() as cursor:
+            sql='''
+            update employee
+            set
+            username=%s,
+            userage=%s,
+            usertel=%s
+            where usernum=%s;
+            '''
+            cursor.execute(sql,(username, userage, usertel, usernum))
+            connection.commit()
+    finally:
+        connection.close()
+    return redirect('/userlist')
+
+@app.route('/usercontent/<usernum>')
+def usercontent(usernum):
+    connection = pymysql.connect(host='maria',
+                                 user='root',
+                                 password='qwer1234',
+                                 db='test',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            sql = "select * from employee where usernum = %s;"
+            cursor.execute(sql, usernum)
+            result = cursor.fetchone()
+            print(result)
+    finally:
+        connection.close()
+    return render_template('user_content.html', list=result)
+
+@app.route('/userdelete/<usernum>')
+def userdeleteformget(usernum):
+    connection=pymysql.connect(host='maria',
+                               user='root',
+                               password='qwer1234',
+                               db='test',
+                               charset='utf8',
+                               cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            sql="delete from employee where usernum=%s;"
+            cursor.execute(sql,usernum)
+            connection.commit()
+    finally:
+        connection.close()
+    return redirect('/userlist')
+
 @app.route('/list')
 def list():
     connection = pymysql.connect(host='maria',
@@ -157,6 +267,24 @@ def list():
     finally:
         connection.close()
     return render_template('list.html', list = result)
+
+@app.route('/userlist')
+def userlist():
+    connection = pymysql.connect(host='maria',
+                                 user='root',
+                                 password='qwer1234',
+                                 db='test',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            sql="select * from employee;"
+            cursor.execute(sql)
+            result=cursor.fetchall()
+            print(result)
+    finally:
+        connection.close()
+    return render_template('userlist.html', list = result)
 
 @app.route('/ajaxlist', methods=['GET'])
 def ajaxlistget():
