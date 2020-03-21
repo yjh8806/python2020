@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $("li").text("한 번에 변경");
+        });
+    </script>
+    <script>
+        $(function(){
+            $("li").text("<p>한 번에 변경</p>");
+            $("li").html("<p>한 번에 변경</p>");
+        })
+    </script>
+</head>
+<body>
+    <div id="p1">내용 1</div>
+    <div id="p2" class="red">
+        <ul>
+            <li>사과</li>
+            <li>배</li>
+            <li>감</li>
+            <li>귤</li>
+            <li>포도</li>
+            <li>키위</li>
+        </ul>
+    </div>
+    <div id="p3" class="red">
+        <ul>
+            <li>인덱스-1</li>
+            <li>인덱스-2</li>
+            <li>인덱스-3</li>
+            <li>인덱스-4</li>
+            <li>인덱스-5</li>
+            <li>인덱스-6</li>
+        </ul>
+    </div>
+</body>
+</html>
