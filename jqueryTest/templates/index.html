@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    // $(document).ready(function(){ // (document) : 선택자 / document가 준비되었으면(다 받아졌으면) 실행해라.
+    //     document.write("When the document is completely ready !");
+    // });
+    // // 보통 (document).ready는 생략해서 $(function(){}); 로 사용
+    $(function(){
+        $("*").css("border","1px solid blue");          // "*"는 h1~h3 모두 실행
+        $('h1').css("background-color","blue");         // h1태그 실행
+        $('#title').css("background-color","yellow");   // id가 title인 것 실행
+        $('.relation').css("border","3px dotted red");  // 클래스가 relation인 것 실행
+    });
+
+
+
+
+    </script>
+</head>
+<body>
+    <h1>제이쿼리</h1>
+    <h2 id="title">직접 선택자 및 관계 선택자</h2>
+    <h2 class="relation">관계 선택자</h2>
+    <h3>직접 선택자</h3>
+</body>
+</html>

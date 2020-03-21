@@ -22,6 +22,9 @@ def index4():
 def index5():
     return render_template('index5.html')
 
+@app.route('/index6')
+def index6():
+    return render_template('index6.html')
 
 if __name__ == '__main__':
     app.run(debug = True, host = '0.0.0.0', port = 8890)
