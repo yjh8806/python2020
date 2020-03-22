@@ -1,7 +1,39 @@
 from flask import Flask,request,render_template,redirect,url_for,jsonify
-import pymysql,os
+import os
+from flask_sqlalchemy import SQLAlchemy
 
 app=Flask(__name__)
+app.secret_key = "Secret Key"
+
+#SqlAlchemy Database Configuration With Mysql
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:qwer1234@maria/test" # mariadb 사용 시 URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # ↑ sqlite의 경우 경로 설정 -> 'sqlite:////tmp/test.db'
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id          =   db.Column(db.Integer, primary_key = True)
+    userid      =   db.Column(db.String(20))
+    userpw      =   db.Column(db.String(20))
+    username    =   db.Column(db.String(20))
+    userage     =   db.Column(db.Integer)
+    useremail   =   db.Column(db.String(20))
+    useradd     =   db.Column(db.String(20))
+    usergender  =   db.Column(db.String(20))
+    usertel     =   db.Column(db.String(20))
+
+    def __init__(self, userid, userpw, username, userage, useremail, useradd, usergender, usertel):
+        self.userid = userid
+        self.userpw = userpw
+        self.username = username
+        self.userage = userage
+        self.useremail = useremail
+        self.useradd = useradd
+        self.usergender = usergender
+        self.usertel = usertel
+
+
+
 
 @app.route('/')
 def index():
@@ -43,23 +75,9 @@ def usersform():
         usergender = request.form.get('usergender')
         usertel = request.form.get('usertel')
     
-        try:
-            connection=pymysql.connect(host='maria',
-                            user='root',
-                            password='qwer1234',
-                            db='test',
-                            charset='utf8mb4',
-                            cursorclass=pymysql.cursors.DictCursor)
-            
-            with connection.cursor() as cursor:
-                sql='''
-                    insert into users values(%s,%s,%s,%s,%s,%s,%s,%s);
-                    '''
-                cursor.execute(sql,(userid,userpw,username,userage,useremail,useradd,usergender,usertel))
-                connection.commit()
-                     
-        finally:
-            connection.close()                            
+        my_user = User(userid, userpw, username, userage, useremail, useradd, usergender,usertel)
+        db.session.add(my_user)
+        db.session.commit()
 
     return redirect('/list')
 
@@ -160,21 +178,9 @@ def deleteformget(userid):
 
 @app.route('/list')
 def list():
-    connection=pymysql.connect(host='maria',
-                            user='root',
-                            password='qwer1234',
-                            db='test',
-                            charset='utf8mb4',
-                            cursorclass=pymysql.cursors.DictCursor)
-    try:
-        with connection.cursor() as cursor:
-                sql="select * from users;"
-                cursor.execute(sql)
-                result=cursor.fetchall()
-                print(result)
-    finally:
-            connection.close()
-    return render_template('list.html',list=result)      
+    all_data = User.query.all() # 테이블 User = class User
+                                # query.all() = select * from Data
+    return render_template('list.html', list = all_data)
 
 @app.route('/ajaxlist',methods=['GET'])
 def ajaxlistget():

@@ -7,3 +7,7 @@ git clone https://github.com/yjh8806/python2020.git
 
 2. 소스 코딩하기
 
+3. flask-sqlalchemy
+conda install flask-sqlalchemy로 안될 경우 
+conda install -c conda-forge flask-sqlalchemy로 채널 맞춰주기
+
