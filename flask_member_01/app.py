@@ -206,8 +206,8 @@ def ajaxlistpost():
     try:
         with connection.cursor() as cursor:
                 sql="select * from users where userid like %s;"
-                userid=userid+'%'
-                cursor.execute(sql,userid+'%')
+                userid='%' + userid+'%' # yjh8806을 y,j,h 중 꼭 y만이 아니라 다른것을 사용해서 찾을 수 있게 하려면 '%' + userid + '%'
+                cursor.execute(sql,userid)
                 result=cursor.fetchall()
                 print(result)
     finally:

@@ -6,14 +6,15 @@
     <script src="http://code.jquery.com/jquery-latest.js" ></script>
     <script>
      function cmdajax(){
-      $.ajax({	type : "POST",
+      $.ajax({	
+          type : "POST",
 					data : {	"userid" : $("#userid").val()	},
 					url : "/ajaxlist",
 					dataType : "json",
 					success : function(result) {
-						console.log(result);
-            $("#ajaxlist").html("");
-						$("#ajaxlist").append(
+						console.log(result); // console창 log 확인하기 위한 코드
+            $("#ajaxlist").html(""); // table을 지우고 새로 만듦
+						$("#ajaxlist").append(   // append로 추가
              ' <table class="table table-hover table-dark">'+
            ' <thead>'+
              ' <tr>'+
@@ -109,8 +110,8 @@
               </tr>
               {% endfor %}
               </tbody>
-          </table>
-        </div>
+        </table>
+      </div>
     </div>
    </body>
 </html>
