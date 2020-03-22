@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    $(function(){
+        $("img").on("mouseover mouseout", function(){
+            $(this).toggleClass("intro");
+        });
+
+    });
+    </script>
+    <style>
+        .intro{width: 500px; height: 500px;}
+    </style>
+</head>
+<body>
+    <img src="/static/img/img01.jpg" width=200px height=200px>
+    <img src="/static/img/img02.jpg" width=200px height=200px>
+    <img src="/static/img/img03.jpg" width=200px height=200px>
+    <img src="/static/img/img04.jpg" width=200px height=200px>
+</body>
+</html>

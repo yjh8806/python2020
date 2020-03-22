@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    $(function(){
+        $("p").on("mouseover mouseout", function(){
+            $(this).toggleClass("intro");
+        });
+
+    });
+    </script>
+    <style>
+        .intro{font-size: 150%; color: red;}
+    </style>
+</head>
+<body>
+    <p>move the mouse pointer over.....</p>
+</body>
+</html>
