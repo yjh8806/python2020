@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $.ajax({
+                url : "/static/rank.json",
+                dataType : "json",
+                success : function(result){   // index, element
+                    $.each(result.rank, function(i, e){ // $(each)처럼 선택하지 않고 $.each로 쓰면 뒤의 인자값으로 넘겨줄 수 있다
+                        $("#wrap ol").append("<li>" + e["k"] + "</li>");
+                
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>인기 검색어</h1>
+    <div id="wrap">
+        <ol></ol>
+    </div>
+</body>
+</html>

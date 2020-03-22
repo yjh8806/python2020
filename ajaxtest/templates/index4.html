@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- Json ajax -->
+<html>
+<head>
+    <title>Page Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                $.ajax({
+                    url : "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=430156241533f1d058c603178cc3ca0e&targetDt=20120101",
+                    dataType : "json",
+                    success : function(result){
+                        $.each(result.boxOfficeResult.dailyBoxOfficeList, function(i, e){
+                        $("#wrap ol").append("<li>" + e["movieNm"] + "</li>");
+                        });
+                    }
+                });
+            });
+
+            $("#btn2").click(function(){
+                $("#wrap ol").text("");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>인기 검색어</h1>
+    <div id="wrap">
+        <ol></ol>
+    </div>
+    <button id="btn1">불러오기</button>
+    <button id="btn2">삭제하기</button>
+</body>
+</html>
