@@ -29,7 +29,7 @@
                 <td>{{list['userpw']}}</td>
                 <td>{{list['username']}}</td>
                 <td>{{list['userage']}}</td>
-                <td>{{list['usermail']}}</td>
+                <td>{{list['useremail']}}</td>
                 <td>{{list['useradd']}}</td>
                 <td>{{list['usergender']}}</td>
                 <td>{{list['usertel']}}</td>
@@ -39,11 +39,11 @@
           </table>
           <script type="text/javascript"> 
             function goUpdate() { 
-                dir="/updateform/{{list['userid']}}"
+                dir="/updateform/{{list['id']}}"
                 location.replace(dir); 
             } 
             function goDelete() { 
-              dir="/deleteform/{{list['userid']}}"
+              dir="/deleteform/{{list['id']}}"
               location.replace(dir); 
             }
             

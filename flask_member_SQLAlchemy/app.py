@@ -34,7 +34,6 @@ class User(db.Model):
 
 
 
-
 @app.route('/')
 def index():
     return render_template('bootstraptest.html')
@@ -140,22 +139,8 @@ def updateformpost():
 
 @app.route('/content/<userid>')
 def content(userid):
-    connection=pymysql.connect(host='maria',
-                            user='root',
-                            password='qwer1234',
-                            db='test',
-                            charset='utf8mb4',
-                            cursorclass=pymysql.cursors.DictCursor)
-       
-    try:
-        with connection.cursor() as cursor:
-            sql="select * from users where userid = %s;"
-            cursor.execute(sql,userid)
-            result=cursor.fetchone()
-            print(result)
-    finally:
-        connection.close()
-    return render_template('content.html',list=result)
+    result = User.query.get(userid)
+    return render_template('content.html', list = result) 
 
 
 @app.route('/deleteform/<userid>')

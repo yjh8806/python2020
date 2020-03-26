@@ -11,28 +11,30 @@
         <table class="table table-hover table-dark">
             <thead>
               <tr>
-                <th scope="col">아이디</th>
-                <th scope="col">패스워드</th>
-                <th scope="col">이름</th>
-                <th scope="col">나이</th>
-                <th scope="col">메일주소</th>
-                <th scope="col">주소</th>
-                <th scope="col">성별</th>
-                <th scope="col">전화번호</th>
+                <th scope="col" style="text-align: center;">순번</th>
+                <th scope="col" style="text-align: center;">아이디</th>
+                <th scope="col" style="text-align: center;">패스워드</th>
+                <th scope="col" style="text-align: center;">이름</th>
+                <th scope="col" style="text-align: center;">나이</th>
+                <th scope="col" style="text-align: center;">메일주소</th>
+                <th scope="col" style="text-align: center;">주소</th>
+                <th scope="col" style="text-align: center;">성별</th>
+                <th scope="col" style="text-align: center;">전화번호</th>
               </tr>
             </thead>
             
             <tbody>
               {% for item in list: %}
               <tr>  <!-- item.userid 가능 !! -->
-                <td><a href="/content/{{item['userid']}}">{{item['userid']}}</a></td>
-                <td>{{item['userpw']}}</td>
-                <td>{{item['username']}}</td>
-                <td>{{item['userage']}}</td>
-                <td>{{item['usermail']}}</td>
-                <td>{{item['useradd']}}</td>
-                <td>{{item['usergender']}}</td>
-                <td>{{item['usertel']}}</td>
+                <td style="text-align: center;"><a href="/content/{{item['id']}}">{{item['id']}}</a></td>
+                <td style="text-align: center;">{{item['userid']}}</td>
+                <td style="text-align: center;">{{item['userpw']}}</td>
+                <td style="text-align: center;">{{item['username']}}</td>
+                <td style="text-align: center;">{{item['userage']}}</td>
+                <td style="text-align: center;">{{item['useremail']}}</td>
+                <td style="text-align: center;">{{item['useradd']}}</td>
+                <td style="text-align: center;">{{item['usergender']}}</td>
+                <td style="text-align: center;">{{item['usertel']}}</td>
               </tr>
               {% endfor %}
               </tbody>
