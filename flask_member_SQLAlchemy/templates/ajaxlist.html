@@ -15,17 +15,18 @@
 						console.log(result); // console창 log 확인하기 위한 코드
             $("#ajaxlist").html(""); // table을 지우고 새로 만듦
 						$("#ajaxlist").append(   // append로 추가
-             ' <table class="table table-hover table-dark">'+
-           ' <thead>'+
-             ' <tr>'+
-                '<th scope="col">아이디</th>'+
-                '<th scope="col">패스워드</th>'+
-                '<th scope="col">이름</th>'+
-                '<th scope="col">나이</th>'+
-                '<th scope="col">메일주소</th>'+
-                '<th scope="col">주소</th>'+
-                '<th scope="col">성별</th>'+
-                '<th scope="col">전화번호</th>'+
+              '<table class="table table-hover table-dark">'+
+            '<thead>'+
+              '<tr>'+
+                '<th scope="col" style="text-align: center;">순번</th>'+ 
+                '<th scope="col" style="text-align: center;">아이디</th>'+
+                '<th scope="col" style="text-align: center;">패스워드</th>'+
+                '<th scope="col" style="text-align: center;">이름</th>'+
+                '<th scope="col" style="text-align: center;">나이</th>'+
+                '<th scope="col" style="text-align: center;">메일주소</th>'+
+                '<th scope="col" style="text-align: center;">주소</th>'+
+                '<th scope="col" style="text-align: center;">성별</th>'+
+                '<th scope="col" style="text-align: center;">전화번호</th>'+
               '</tr>'+
             '</thead>'
             ); 
@@ -33,6 +34,9 @@
             $(result).each(function(index, item) {
             $("table").append(
               "<tr>"
+              + "<td>"
+              + item.id
+              + "</td>" 
               + "<td><a href='/content/"+ item.userid +"'>"
               + item.userid  
               + "</a></td>"
@@ -46,7 +50,7 @@
 							+ item.userage
 							+ "</td>"
 							+ "<td>"
-							+ item.usermail
+							+ item.useremail
 							+ "</td>"
 							+ "<td>"
 							+ item.useradd
@@ -71,11 +75,11 @@
   </head>
   <body>
     {% include "menu.html" %}     
-    <h1 align="center">회원목록 리스트</h1>
+    <h1 align="center">회원검색 리스트</h1>
     <div class="container-fluid">
       <form method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" onkeyup="cmdajax();"  placeholder="userid" id="userid" name="userid" aria-label="userid" aria-describedby="button-addon2">
+          <input type="text" class="form-control" onkeyup="cmdajax();"  placeholder="찾고자 하는 사용자의 ID를 입력하세요." id="userid" name="userid" aria-label="userid" aria-describedby="button-addon2">
         </div>
       </form>
     </div>
@@ -85,28 +89,30 @@
         <table class="table table-hover table-dark">
             <thead>
               <tr>
-                <th scope="col">아이디</th>
-                <th scope="col">패스워드</th>
-                <th scope="col">이름</th>
-                <th scope="col">나이</th>
-                <th scope="col">메일주소</th>
-                <th scope="col">주소</th>
-                <th scope="col">성별</th>
-                <th scope="col">전화번호</th>
+                <th scope="col" style="text-align: center;">순번</th>
+                <th scope="col" style="text-align: center;">아이디</th>
+                <th scope="col" style="text-align: center;">패스워드</th>
+                <th scope="col" style="text-align: center;">이름</th>
+                <th scope="col" style="text-align: center;">나이</th>
+                <th scope="col" style="text-align: center;">메일주소</th>
+                <th scope="col" style="text-align: center;">주소</th>
+                <th scope="col" style="text-align: center;">성별</th>
+                <th scope="col" style="text-align: center;">전화번호</th>
               </tr>
             </thead>
             
             <tbody>
               {% for item in list: %}
               <tr>
-                <td><a href="/content/{{item['userid']}}">{{item['userid']}}</a></td>
-                <td>{{item['userpw']}}</td>
-                <td>{{item['username']}}</td>
-                <td>{{item['userage']}}</td>
-                <td>{{item['usermail']}}</td>
-                <td>{{item['useradd']}}</td>
-                <td>{{item['usergender']}}</td>
-                <td>{{item['usertel']}}</td>
+                <td style="text-align: center;"><a href="/content/{{item['id']}}">{{item['id']}}</a></td>
+                <td style="text-align: center;">{{item['userid']}}</td>
+                <td style="text-align: center;">{{item['userpw']}}</td>
+                <td style="text-align: center;">{{item['username']}}</td>
+                <td style="text-align: center;">{{item['userage']}}</td>
+                <td style="text-align: center;">{{item['useremail']}}</td>
+                <td style="text-align: center;">{{item['useradd']}}</td>
+                <td style="text-align: center;">{{item['usergender']}}</td>
+                <td style="text-align: center;">{{item['usertel']}}</td>
               </tr>
               {% endfor %}
               </tbody>

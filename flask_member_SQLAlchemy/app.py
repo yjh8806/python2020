@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template,redirect,url_for,jsonify
+from flask import Flask,request,render_template,redirect,url_for,jsonify,flash
 import os
 from flask_sqlalchemy import SQLAlchemy
 
@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id          =   db.Column(db.Integer, primary_key = True)
-    userid      =   db.Column(db.String(20))
+    userid      =   db.Column(db.String(20), primary_key = True)
     userpw      =   db.Column(db.String(20))
     username    =   db.Column(db.String(20))
     userage     =   db.Column(db.Integer)
@@ -82,60 +82,28 @@ def usersform():
 
 @app.route('/updateform/<userid>',methods=['GET'])
 def updateformget(userid):
-    connection=pymysql.connect(host='maria',
-                            user='root',
-                            password='qwer1234',
-                            db='test',
-                            charset='utf8mb4',
-                            cursorclass=pymysql.cursors.DictCursor)
-       
-    try:
-        with connection.cursor() as cursor:
-            sql="select * from users where userid = %s;"
-            cursor.execute(sql,userid)
-            result=cursor.fetchone()
-            print(result)
-    finally:
-        connection.close()
-    return render_template('updateform.html',list=result)  
+    result = User.query.get(userid)
+    return render_template('updateform.html', list = result)
 
-@app.route('/updateform',methods=['POST'])
+@app.route('/updateform',methods=['GET', 'POST'])
 def updateformpost():
-    connection=pymysql.connect(host='maria',
-                            user='root',
-                            password='qwer1234',
-                            db='test',
-                            charset='utf8mb4',
-                            cursorclass=pymysql.cursors.DictCursor)
-
-    userid = request.form.get('userid')
-    userpw = request.form.get('userpw')
-    username = request.form.get('username')
-    userage = request.form.get('userage')
-    useremail = request.form.get('useremail')
-    useradd = request.form.get('useradd')
-    usergender = request.form.get('usergender')
-    usertel = request.form.get('usertel')
     
-    try:
-        with connection.cursor() as cursor:
-            sql='''
-                update users 
-                set 
-                userpw=%s,
-                username=%s,
-                userage=%s,
-                usermail=%s,
-                useradd=%s,
-                usergender=%s,
-                usertel=%s
-                where userid=%s;
-                '''
-            cursor.execute(sql,(userpw,username,userage,useremail,useradd,usergender,usertel,userid))
-            connection.commit()
-    finally:
-        connection.close()                            
-    return redirect('/list')    
+    if request.method == 'POST':
+        # id값을 통해 값을 가져와 저장해 둠
+        my_user = User.query.get(request.form.get('userid'))
+        
+        my_user.userpw = request.form['userpw']
+        my_user.username = request.form['username']
+        my_user.userage = request.form['userage']
+        my_user.useremail = request.form['useremail']
+        my_user.useradd = request.form['useradd']
+        my_user.usergender = request.form['usergender']
+        my_user.usertel = request.form['usertel']
+    
+        db.session.commit()
+        flash("업데이트 완료 !!")
+        
+        return redirect('/list')
 
 @app.route('/content/<userid>')
 def content(userid):
@@ -169,40 +137,23 @@ def list():
 
 @app.route('/ajaxlist',methods=['GET'])
 def ajaxlistget():
-    connection=pymysql.connect(host='maria',
-                            user='root',
-                            password='qwer1234',
-                            db='test',
-                            charset='utf8mb4',
-                            cursorclass=pymysql.cursors.DictCursor)
-    try:
-        with connection.cursor() as cursor:
-                sql="select  * from users;"
-                cursor.execute(sql)
-                result=cursor.fetchall()
-                print(result)
-    finally:
-            connection.close()
-    return render_template('ajaxlist.html',list=result)      
+    result = User.query.all()
+    return render_template('ajaxlist.html', list = result)      
 
 @app.route('/ajaxlist',methods=['POST'])
 def ajaxlistpost():
-    userid = request.form.get('userid')
-    connection=pymysql.connect(host='maria',
-                            user='root',
-                            password='qwer1234',
-                            db='test',
-                            charset='utf8mb4',
-                            cursorclass=pymysql.cursors.DictCursor)
-    try:
-        with connection.cursor() as cursor:
-                sql="select * from users where userid like %s;"
-                userid='%' + userid+'%' # yjh8806을 y,j,h 중 꼭 y만이 아니라 다른것을 사용해서 찾을 수 있게 하려면 '%' + userid + '%'
-                cursor.execute(sql,userid)
-                result=cursor.fetchall()
-                print(result)
-    finally:
-            connection.close()
+    result = User.query.filter(User.userid.like("'%' + userid + '%'")).all()
+    # yjh8806을 y,j,h 중 꼭 y만이 아니라 다른것을 사용해서 찾을 수 있게 하려면 '%' + userid + '%'
+    
+    # try:
+    #     with connection.cursor() as cursor:
+    #             sql="select * from users where userid like %s;"
+    #             userid='%' + userid+'%' 
+    #             cursor.execute(sql,userid)
+    #             result=cursor.fetchall()
+    #             print(result)
+    # finally:
+    #         connection.close()
     return jsonify(result)    
 
 @app.route('/imglist')
