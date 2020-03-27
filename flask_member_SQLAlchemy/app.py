@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id          =   db.Column(db.Integer, primary_key = True)
-    userid      =   db.Column(db.String(20), primary_key = True)
+    userid      =   db.Column(db.String(20))
     userpw      =   db.Column(db.String(20))
     username    =   db.Column(db.String(20))
     userage     =   db.Column(db.Integer)
@@ -111,22 +111,19 @@ def content(userid):
     return render_template('content.html', list = result) 
 
 
-@app.route('/deleteform/<userid>')
-def deleteformget(userid):
-    connection=pymysql.connect(host='maria',
-                            user='root',
-                            password='qwer1234',
-                            db='test',
-                            charset='utf8mb4',
-                            cursorclass=pymysql.cursors.DictCursor)
-       
-    try:
-        with connection.cursor() as cursor:
-            sql="delete from users where userid = %s;"
-            cursor.execute(sql,userid)
-            connection.commit()
-    finally:
-        connection.close()
+@app.route('/deleteform/<id>')
+def deleteformget(id):
+    my_user = User.query.get(id)
+    db.session.delete(my_user)
+    db.session.commit()
+    flash("회원 정보 삭제 완료 !!")
+    # try:
+    #     with connection.cursor() as cursor:
+    #         sql="delete from users where userid = %s;"
+    #         cursor.execute(sql,userid)
+    #         connection.commit()
+    # finally:
+    #     connection.close()
     return redirect('/list')  
 
 @app.route('/list')
@@ -142,7 +139,7 @@ def ajaxlistget():
 
 @app.route('/ajaxlist',methods=['POST'])
 def ajaxlistpost():
-    result = User.query.filter(User.userid.like("'%' + userid + '%'")).all()
+    result = User.query.filter_by(userid = '%' + User.userid + '%').all()
     # yjh8806을 y,j,h 중 꼭 y만이 아니라 다른것을 사용해서 찾을 수 있게 하려면 '%' + userid + '%'
     
     # try:
