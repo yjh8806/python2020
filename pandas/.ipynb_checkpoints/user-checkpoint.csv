@@ -1,3 +1,4 @@
-userid, username, userage, usertel
-hong, 홍길동, 23, 010-1111-2222
-kim, 김철수, 33, 010-3333-4444
+userid, userpw, username, userage, usermail, useradd, usergender, usertel
+hong, 8806, 홍길동, 23, ,hong1@gmail.com, saha, male, 010-1111-2222
+kim, 5438, 김철수, 33, kim124@gmail.com, dangni, male, 010-3333-4444
+lee, 8465, 이지원, 20, lee7554@gmail.com, daeti, female, 010-5463-3245
