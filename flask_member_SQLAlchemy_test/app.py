@@ -11,7 +11,7 @@ db = SQLAlchemy(app)
 
 
 class User(db.Model):
-    #id =  db.Column(db.Integer, primary_key = True)
+    #id =  db.Column(db.Integer, primary_key = True) # primary_key=True -> 알아서 순차적으로 1,2,3,4,5...
     userid = db.Column(db.String(20),primary_key = True)
     userpw = db.Column(db.String(20))
     username = db.Column(db.String(20))
@@ -78,7 +78,8 @@ def updateformget(userid):
 
 @app.route('/updateform',methods=['POST'])
 def updateformpost():
-    my_user = User.query.get(request.form.get('userid'))   
+    my_user = User.query.get(request.form.get('userid')) # 앞에서 요청받은 'userid'를 get
+                                                         # primary_key 이므로 중복안되기 때문에 이 코딩이 가능
     
     my_user.userid = request.form.get('userid')
     my_user.userpw = request.form.get('userpw')
@@ -95,13 +96,13 @@ def updateformpost():
 
 @app.route('/content/<userid>')
 def content(userid):
-    result=User.query.filter_by(userid = userid).one()
+    result=User.query.filter_by(userid = userid).one() # filter_by : 조건식 쓰기 
     return render_template('content.html',list=result)
 
 
 @app.route('/deleteform/<userid>')
-def deleteformget(userid):
-    my_data = User.query.get(userid)
+def deleteformget(userid): 
+    my_data = User.query.get(userid)                   # primary_key, 키 값 사용
     db.session.delete(my_data)
     db.session.commit()
     return redirect('/list')  
@@ -119,10 +120,10 @@ def ajaxlistget():
 @app.route('/ajaxlist',methods=['POST'])
 def ajaxlistpost():
     userid = request.form.get('userid')
-    query = User.query.filter(User.userid.like('%'+userid+'%')). order_by(User.userid)
-    all_data = query.all()
+    query = User.query.filter(User.userid.like('%'+userid+'%')).order_by(User.userid)
+    all_data = query.all()                       # order_by : User.userid 순서대로 정렬
    
-    return jsonify(all_data)    
+    return jsonify(all_data) # ajax는 json형태로 받음  
 
 @app.route('/imglist')
 def imglist():
