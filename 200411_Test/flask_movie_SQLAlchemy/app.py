@@ -39,6 +39,10 @@ def index():
 def movieinfo():
     return render_template('movieinfo.html')
 
+@app.route('/moviesearch')
+def moviesearch():
+    return "성공"
+
 @app.route('/form')
 def formTest():
     return render_template('form.html')
@@ -163,4 +167,4 @@ def imglist():
     return render_template('imglist.html',filenames=filenames)        
 
 if __name__ =='__main__':
-    app.run(debug=True,host='0.0.0.0',port=8890)
+    app.run(debug=True,host='0.0.0.0',port=8891)
