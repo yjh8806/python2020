@@ -1,5 +1,5 @@
 from flask import Flask,request,render_template,redirect,url_for,jsonify,flash
-import os
+import pymysql, os
 from flask_sqlalchemy import SQLAlchemy
 
 app=Flask(__name__)
@@ -11,32 +11,33 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # ↑ sqlite의 경우 경�
 
 db = SQLAlchemy(app)
 
-class User(db.Model):
-    id          =   db.Column(db.Integer, primary_key = True)
-    userid      =   db.Column(db.String(20))
-    userpw      =   db.Column(db.String(20))
-    username    =   db.Column(db.String(20))
-    userage     =   db.Column(db.Integer)
-    useremail   =   db.Column(db.String(20))
-    useradd     =   db.Column(db.String(20))
-    usergender  =   db.Column(db.String(20))
-    usertel     =   db.Column(db.String(20))
+class movie(db.Model):
+    code = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(100))
+    time = db.Column(db.Integer)
+    sdate = db.Column(db.String(100))
+    grade = db.Column(db.String(100))
+    audience = db.Column(db.Integer)
+    summary = db.Column(db.String(100))
+    thumb = db.Column(db.String(100))
 
-    def __init__(self, userid, userpw, username, userage, useremail, useradd, usergender, usertel):
-        self.userid = userid
-        self.userpw = userpw
-        self.username = username
-        self.userage = userage
-        self.useremail = useremail
-        self.useradd = useradd
-        self.usergender = usergender
-        self.usertel = usertel
-
-
+    def __init__(self, code, title, time, sdate, grade, audience, summary, thumb):
+        self.code = code
+        self.title = title
+        self.time = time
+        self.sdate = sdate
+        self.grade = grade
+        self.audience = audience
+        self.summary = summary
+        self.thumb = thumb
 
 @app.route('/')
 def index():
     return render_template('bootstraptest.html')
+
+@app.route('/movieinfo')
+def movieinfo():
+    return render_template('movieinfo.html')
 
 @app.route('/form')
 def formTest():

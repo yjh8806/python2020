@@ -1,4 +1,4 @@
-테이블 이름  movie
+테이블 이름 movie
 
 code 영화코드 int pk,
 title 영화제목 string,
