@@ -3,13 +3,28 @@
 {% block head %}
 
 <script>
-  function moviesearch(){
+  function movieword(code){
+    add="/movieword/"+code
+    console.log(add)
     $.ajax({
      type : "GET",
-     url : "/moviesearch",
+     url : add,
      dataType : "text",
      success : function(result){
-       $("#c1").html(result);
+       $("#img_src").html('<img src="/static/img/img'+code+'.png">');
+     }
+   });
+  }
+
+  function moviechart(code){
+    add="/moviechart/"+code
+    console.log(add)
+    $.ajax({
+     type : "GET",
+     url : add,
+     dataType : "text",
+     success : function(result){
+       $("#img_src").html(result);
      }
    });
   }

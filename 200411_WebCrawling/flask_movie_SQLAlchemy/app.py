@@ -1,6 +1,7 @@
 from flask import Flask,request,render_template,redirect,url_for,jsonify
 import naver_movie,movie_start,movie_wordcloud
 import pandas as pd
+from soynlp.noun import LRNounExtractor
 
 app=Flask(__name__)
 
@@ -56,8 +57,12 @@ def content(code):
 
 @app.route('/movieword/<code>')
 def movieword(code):
-    df1=movie_start.Getdata([code],10)
-    movie_wordcloud.displayWordCloud(str(code),' '.join(df1['text']))    
+    df1=movie_start.Getdata([code],15)
+    # Soynlp로 명사 추출
+    noun_extractor = LRNounExtractor(verbose=True)
+    noun_extractor.train(df1['text'])
+    nouns = noun_extractor.extract()
+    movie_wordcloud.displayWordCloud(str(code),' '.join(nouns))
     return "ok"
 
 @app.route('/moviechart/<code>')
