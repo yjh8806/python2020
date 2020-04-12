@@ -63,6 +63,6 @@ def step1_Getdata():
                         df.columns = ['text', 'star']
                         df.to_csv('./data/naver_star_data.csv', index=False, encoding='utf-8-sig')
                     else:
-                        df.to_csv('./data/naver_star_data.csv', index=False, encoding='utf-8-sig', mode='a', header=False)
+                        df.to_csv('./data/naver_star_data.csv', index=False, encoding='utf-8-sig', mode='a', header=False) # mode = 'a' = append 의미
                     now_page += 1
                     print('%d / %d' % (now_page, pageCnt))

@@ -52,7 +52,7 @@ def content(code):
     df=pd.read_sql_query(sa.select([data_table]).where(data_table.c.code == code) , engine) # c.code : c는 column
     movielist= df.to_dict(orient="record") # orient = "record" : 행단위로
     # df1=movie_start.Getdata([code],10)
-    # movie_wordcloud.displayWordCloud(str(code),' '.join(df1['text'])) 
+    # movie_wordcloud.displayWordCloud(str(code),' '.join(df1['text']))
     return render_template('content.html', movielist=movielist)
 
 @app.route('/movieword/<code>')
