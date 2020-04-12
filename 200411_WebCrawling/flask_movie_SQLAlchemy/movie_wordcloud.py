@@ -17,4 +17,4 @@ def displayWordCloud(code,data = None, backgroundcolor = 'white', width=800, hei
     file_dir=os.path.dirname(os.path.realpath(__file__))
     os.path.dirname(os.path.realpath(__file__))
     file_name="img" + code + ".png"
-    wordcloud.to_file(file_dir+"/static/img/"+file_name)
+    wordcloud.to_file(file_dir+"/static/img"+file_name)

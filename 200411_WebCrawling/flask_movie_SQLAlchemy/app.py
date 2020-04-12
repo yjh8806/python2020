@@ -72,4 +72,4 @@ def moviechart(code):
 
 
 if __name__ =='__main__':
-    app.run(debug=True,host='0.0.0.0',port=8890)
+    app.run(debug=True,host='0.0.0.0',port=8891)
