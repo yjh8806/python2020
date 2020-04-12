@@ -17,21 +17,20 @@
 {% endblock %}
 
 {% block content %}
-  <h1 align="center">영화 상세 정보</h1>
+  <h1 align="center">영화 목록 리스트</h1>
   <div class="container">
-    <br>
     <table class="table table-hover">
       <thead>
         <tr>
-                                                    <!-- colspan : 행 합치기 -->
-          <th scope="col" style="text-align: center;" colspan="2">영 화 내 용</th>
+          <th scope="col" style="text-align: center;">포스트</th>
+          <th scope="col" style="text-align: center;">목록</th s>
         </tr>
       </thead>
 
       <tbody>
         {% for item in movielist: %}
         <tr>
-          <td style="text-align: center; vertical-align: middle;">
+          <td>
             <a href="/content/{{item['code']}}">
               <img src = "{{item['thumb']}}">
             </a>
@@ -44,14 +43,6 @@
               <hr>
               <!-- hr태그는 수평막대 태그 : summary 내용이 길 수도 있기 때문에 -->
               {{item['summary']}}
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <button onclick="movieword({{item['code']}});">워드클라우드</button>
-            <button onclick="moviechart({{item['code']}});">매출 차트</button>
-            <br>
-            <span id="img_src"></span>
           </td>
         </tr>
         {% endfor %}
