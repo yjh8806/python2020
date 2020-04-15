@@ -25,8 +25,12 @@ def step4_using() :
     y_pred = pipe.predict(["그닥"])
     print(y_pred)
     
-    keyword = input("결과를 확인하고 싶은 단어나 문장을 입력 (결과는 0, 1) : ")
-    y_pred = pipe.predict([keyword])
-    print(y_pred)
-    # 복사+붙여넣기로 문장을 넣어서 학습이 잘 되었는지 확인해보기
-    # print('정확도 : %.3f' % accuracy_score(y_test, y_pred))
+    while True:
+        keyword = input("단어 혹은 문장 입력 (0 혹은 1의 결과를 도출, Enter,올바르지 않은 단어 입력 시 종료) : ")
+        if keyword == '':
+            print("프로그램 종료")
+        else:
+            y_pred = pipe.predict([keyword])
+            print(y_pred)
+        # 복사+붙여넣기로 문장을 넣어서 학습이 잘 되었는지 확인해보기
+        # print('정확도 : %.3f' % accuracy_score(y_test, y_pred))

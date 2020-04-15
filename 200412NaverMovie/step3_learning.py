@@ -36,7 +36,7 @@ def step3_learning() :      # 실제 학습
     pipe.fit(X_train, y_train)  # .fit() -> 학습 종료
     print("학습 종료")              
     etime = time()              
-    print("총 학습 시간 : %d" % (etime - stime)) # 끝난 시간 - 시작 시간 = 총 학습 시간
+    print("총 학습 시간 : %d초" % (etime - stime)) # 끝난 시간 - 시작 시간 = 총 학습 시간
 
     # 학습 정확도 측정
     y_pred = pipe.predict(X_test)                           # 학습한 내용을 Test함 / 가설에 의해서 나온 값 = y_pred (실제 값과 가설의 값을 비교해보자)
