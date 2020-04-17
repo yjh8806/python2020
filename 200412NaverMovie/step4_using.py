@@ -29,6 +29,7 @@ def step4_using() :
         keyword = input("단어 혹은 문장 입력 (0 혹은 1의 결과를 도출, Enter,올바르지 않은 단어 입력 시 종료) : ")
         if keyword == '':
             print("프로그램 종료")
+            break
         else:
             y_pred = pipe.predict([keyword])
             print(y_pred)
